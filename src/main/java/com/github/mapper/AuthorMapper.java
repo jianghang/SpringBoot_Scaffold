@@ -1,21 +1,11 @@
 package com.github.mapper;
 
+import com.github.common.CommonMapper;
 import com.github.entity.Author;
 
 import java.util.List;
 
-public interface AuthorMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Author record);
-
-    int insertSelective(Author record);
-
-    Author selectByPrimaryKey(Long id);
+public interface AuthorMapper extends CommonMapper<Author> {
 
     List<Author> selectAllAuthor();
-
-    int updateByPrimaryKeySelective(Author record);
-
-    int updateByPrimaryKey(Author record);
 }

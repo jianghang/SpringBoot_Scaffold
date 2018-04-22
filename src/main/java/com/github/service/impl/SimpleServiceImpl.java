@@ -25,7 +25,7 @@ public class SimpleServiceImpl implements ISimpleService{
 
     @Override
     public Author searchAuthor(Integer id) {
-        Author author = authorMapper.selectByPrimaryKey((long)id);
+        Author author = authorMapper.selectByPrimaryKey(id);
 
         return author;
     }
