@@ -1,5 +1,6 @@
 package com.github;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 @EnableCaching(proxyTargetClass = true)
 @ServletComponentScan
+@MapperScan("com.github.mapper")
 public class ApplicationStartup extends SpringBootServletInitializer{
 
     private static Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
