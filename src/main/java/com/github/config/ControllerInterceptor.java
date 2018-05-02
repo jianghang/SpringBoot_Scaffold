@@ -17,13 +17,16 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
     private Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
 
+    private static final String REQUEST_UUID = "requestUUID";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String requestUUID = MDC.get("requestUUID");
+        String requestUUID = MDC.get(REQUEST_UUID);
         if(requestUUID == null || "".equals(requestUUID)){
             String uuid = UUID.randomUUID().toString();
             uuid = uuid.replaceAll("-","").toUpperCase();
-            MDC.put("requestUUID",uuid);
+            MDC.put(REQUEST_UUID,uuid);
+            response.addHeader("serial-number",MDC.get(REQUEST_UUID));
 //            logger.info("ControllerInterceptor preHandle 在请求处理之前生成 logback requestUUID:{}",uuid);
         }
 
@@ -32,7 +35,7 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        MDC.remove("requestUUID");
+        MDC.remove(REQUEST_UUID);
 //        logger.info("ControllerInterceptor postHandle 请求处理之后清除 logback MDC requestUUID");
     }
 
